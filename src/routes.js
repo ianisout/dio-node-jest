@@ -1,18 +1,10 @@
-import { response, Router } from 'express'
+import { Router } from 'express'
+import { usersController } from './controllers/usersController.js'
 
 const routes = Router()
 
-const database = ['ian']
+routes.get('/users', usersController.listUsers)
 
-routes.get('/users', (req, res) => {
-  return res.status(200).json(database)
-})
-
-routes.post('/users', (req, res) => {
-  const { name } = req.body
-  database.push(name)
-  
-  return res.status(201).json({"msg": `Usuário ${name} criado`})
-})
+routes.post('/users', usersController.createUser)
 
 export { routes }
